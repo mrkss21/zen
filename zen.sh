@@ -1,5 +1,3 @@
-sync; dd if=/dev/zero of=tempfile bs=1M count=1024; sync
-sudo nano /etc/hosts
 sudo apt-get update && sudo apt-get -y upgrade \&&
 sudo apt -y install pwgen
 sudo fallocate -l 4G /swapfile
