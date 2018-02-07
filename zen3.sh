@@ -1,19 +1,12 @@
-sudo apt-get update && sudo apt-get -y upgrade
-sudo apt -y install pwgen
-sudo fallocate -l 4G /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-sudo su -
-cat <<EOF >> /etc/fstab
-/swapfile none swap sw 0 0
-EOF
-exit
-sudo su -
-cat <<EOF >> /etc/sysctl.conf
-vm.swappiness=10
-EOF
-exit
+apt-get update 
+apt-get -y upgrade
+apt -y install pwgen
+fallocate -l 4G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo "/swapfile none swap sw 0 0" >> /etc/fstab
+echo "vm.swappiness=10" >> /etc/sysctl.conf
 sudo apt-get install -y apt-transport-https lsb-release
 echo 'deb https://zencashofficial.github.io/repo/ '$(lsb_release -cs)' main' | sudo tee --append /etc/apt/sources.list.d/zen.list
 gpg --keyserver ha.pool.sks-keyservers.net --recv 219F55740BBF7A1CE368BA45FB7053CE4991B669
