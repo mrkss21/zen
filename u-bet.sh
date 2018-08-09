@@ -66,8 +66,6 @@ echo -e "The Masternode Private Key is: ${RED}$PRIV_KEY${NC}"
 U-BET-cli stop
 sleep 10
 myip=`curl ipinfo.io/ip`
-echo -e "Your U-BET Masternode (MN) Public IP Address and the Port are: ${RED}$myip:$DEFAULTUBETPORT${NC}"
-echo -e "Your U-BET Masternode (MN) Config file is: ${RED}MN01 $myip:$DEFAULTUBETPORT$ $PRIV_KEY${NC}"
 cat << EOF | tee $DEFAULTUBETFOLDER/$CONFIG_FILE
 rpcuser=$RPCUSER
 rpcpassword=$RPCPASSWORD
@@ -101,12 +99,17 @@ WantedBy=default.target
 EOF
 sudo systemctl enable U-BET@root.service
 sudo systemctl start U-BET@root.service
+sleep 2
+U-BET-cli stop
+sleep 2
+U-BETd -daemon -reindex
 clear
 echo -e "${GREEN}Congrats! Your U-BET Masternode has been successfully installed!"
 echo -e " Please go to your local U-BET wallet folder and add the required data string into the ‘masternode.conf’ file as per the following pattern:"
 echo -e "${RED}MN1 Masternode_Public_IP:20189 Masternode_Private_Key Transaction_ID Transaction_Index"
-echo -e "${NC}Your U-BET Masternode (MN) Public IP Address and the Port are: ${RED}$myip:$DEFAULTUBETPORT"
-echo -e "${NC} Your U-BET Masternode (MN) Private Key is: ${RED}$PRIV_KEY"
-echo -e "Your U-BET Masternode (MN) Config file is: ${RED}MN01 $myip:$DEFAULTUBETPORT$ $PRIV_KEY${NC}"
+echo -e "${NC}Your U-BET Masternode (MN) Public IP Address and the Port are: ${GREEN}$myip:$DEFAULTUBETPORT"
+echo -e "${NC} Your U-BET Masternode (MN) Private Key is: ${GREEN}$PRIV_KEY"
+echo -e "Your U-BET Masternode (MN) Config file is:" 
+echo -e "${GREEN}MN01 $myip:$DEFAULTUBETPORT$ $PRIV_KEY${NC}"
 echo -e "You must add Masternode_Private_Key Transaction_ID Transaction_Index"
 echo -e " ${GREEN}Right after you need to save the ‘masternode.conf’ file. Then you need to wait for at least 15 confirmations for the 2,500 U-BET coins collateral transaction and then restart the wallet (completely close and then run your wallet again). Then go to the ‘Masternode’ tab in the wallet and start your U-BET masternode.${NC} "
