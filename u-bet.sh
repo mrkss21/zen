@@ -62,7 +62,6 @@ EOF
 U-BETd -daemon
 sleep 10
 PRIV_KEY=$(U-BET-cli masternode genkey)
-echo -e "The Masternode Private Key is: ${RED}$PRIV_KEY${NC}"
 U-BET-cli stop
 sleep 10
 myip=`curl ipinfo.io/ip`
@@ -84,6 +83,7 @@ addnode=183.182.104.121
 addnode=45.76.37.150
 addnode=45.76.85.141
 EOF
+clear
 sleep 10
 cat << EOF | sudo tee /etc/systemd/system/U-BET@root.service
 [Unit]
