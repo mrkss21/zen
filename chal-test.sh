@@ -1,4 +1,4 @@
-	cat << EOF | chal.sh
+	cat << EOF | sudo tee /home/znode/chal.sh
 #!/bin/bash
 trkDir="~/nodetracker/"
 trkService="zentracker@$USER"
