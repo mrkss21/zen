@@ -2,7 +2,7 @@
 
 trkDir="$HOME/nodetracker/"
 trkService="zentracker@$USER"
-waitForRestart="10s"
+waitForRestart="20s"
 maxAllowChallenge="300"
 
 function getUrlData(){
