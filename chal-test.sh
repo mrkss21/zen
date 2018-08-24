@@ -1,4 +1,4 @@
-	cat << EOF >> chal.sh
+	cat << EOF | chal.sh
 #!/bin/bash
 trkDir="~/nodetracker/"
 trkService="zentracker@$USER"
