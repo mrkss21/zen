@@ -8,7 +8,7 @@ maxAllowChallenge="300"
 function getUrlData(){
   currSrv=$(journalctl -u $trkService --no-pager 2>/dev/null | tac  | grep -oP -m1 "(?<=Connected to server |connected to:)\w*\.\w*")
   currTa=$(journalctl -u $trkService --no-pager 2>/dev/null | tac | grep -oP -m1 "(?<=Node t_address \(not for stake\)=)\w+")
-  currNid=$(cat ~$trkDir/config/config.json | grep -oP "(?<=\"nodeid\": )\d+")}
+  currNid=$(cat $trkDir/config/config.json | grep -oP "(?<=\"nodeid\": )\d+")}
 }
 
 if [[ $( cat $trkDir/config/local/lastExecSec | cut -d. -f1 ) -ge $maxAllowChallenge ]]; then
