@@ -2,11 +2,11 @@
 
 trkDir="$HOME/nodetracker/"
 trkService="zentracker@$USER"
-waitForRestart="1m"
+waitForRestart="10s"
 maxAllowChallenge="300"
 
 function getUrlData(){
-  currSrv=$(journalctl -u $trkService --no-pager 2>/dev/null | tac  | grep -oP -m1 "(?<=Connected to server |connected to: )\w*\.\w*")
+  currSrv=$(journalctl -u $trkService --no-pager 2>/dev/null | tac  | grep -oP -m1 "(?<=Connected to server |connected to:)\w*\.\w*")
   currTa=$(journalctl -u $trkService --no-pager 2>/dev/null | tac | grep -oP -m1 "(?<=Node t_address \(not for stake\)=)\w+")
   currNid=$(cat ~$trkDir/config/config.json | grep -oP "(?<=\"nodeid\": )\d+")}
 }
